@@ -1,15 +1,17 @@
-System.register([], function (_export) {
+"use strict";
+
+System.register([], function (_export, _context) {
     "use strict";
 
     var ValidationStrategy;
 
-    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+    
 
     return {
         setters: [],
         execute: function () {
-            ValidationStrategy = function ValidationStrategy() {
-                _classCallCheck(this, ValidationStrategy);
+            _export("ValidationStrategy", ValidationStrategy = function ValidationStrategy() {
+                
 
                 this.actionValidProperty = function (element, property) {
                     throw new Error("Must override method");
@@ -18,7 +20,7 @@ System.register([], function (_export) {
                 this.actionInvalidProperty = function (element, property, error) {
                     throw new Error("Must override method");
                 };
-            };
+            });
 
             _export("ValidationStrategy", ValidationStrategy);
         }

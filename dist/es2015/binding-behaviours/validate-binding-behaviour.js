@@ -1,10 +1,9 @@
-import {inject, noView} from "aurelia-framework";
-import {ValidationStrategy} from "../strategy/validation-strategy";
+var _dec, _dec2, _class;
 
-@inject(ValidationStrategy)
-@noView()
-export class ValidateBindingBehavior
-{
+import { inject, noView } from "aurelia-framework";
+import { ValidationStrategy } from "../strategy/validation-strategy";
+
+export let ValidateBindingBehavior = (_dec = inject(ValidationStrategy), _dec2 = noView(), _dec(_class = _dec2(_class = class ValidateBindingBehavior {
     constructor(validationStrategy) {
         this.validationStrategy = validationStrategy;
     }
@@ -13,14 +12,17 @@ export class ValidateBindingBehavior
         let element = binding.target;
         let propertyName = this.getTargetProperty(binding);
 
-        let _validationStateHandler = (args) => {
-            if(args.isValid)
-            { this.validationStrategy.actionValidProperty(element, propertyName); }
-            else
-            { this.validationStrategy.actionInvalidProperty(element, propertyName, args.error); }
+        let _validationStateHandler = args => {
+            if (args.isValid) {
+                this.validationStrategy.actionValidProperty(element, propertyName);
+            } else {
+                this.validationStrategy.actionInvalidProperty(element, propertyName, args.error);
+            }
         };
 
-        let _validationPredicate = (x) => { console.log("pred", x.property, propertyName); return x.property == propertyName; };
+        let _validationPredicate = x => {
+            console.log("pred", x.property, propertyName);return x.property == propertyName;
+        };
 
         let _setupValidation = () => {
             return this.validationGroup.propertyStateChangedEvent.subscribe(_validationStateHandler, _validationPredicate);
@@ -33,19 +35,18 @@ export class ValidateBindingBehavior
         this.validationGroup = overrideContext.bindingContext.validationGroup;
         this.validationOptions = overrideContext.bindingContext.validationOptions || {};
 
-        if(this.validationGroup) {
+        if (this.validationGroup) {
             binding.activeSubscription = _setupValidation();
-            this.validationGroup.getPropertyError(propertyName)
-                .then((error) => {
-                    if(error) {
-                        this.validationStrategy.actionInvalidProperty(element, propertyName, error);
-                    }
-                });
+            this.validationGroup.getPropertyError(propertyName).then(error => {
+                if (error) {
+                    this.validationStrategy.actionInvalidProperty(element, propertyName, error);
+                }
+            });
         }
     }
 
     unbind(binding, overrideContext) {
-        if(binding.activeSubscription) {
+        if (binding.activeSubscription) {
             binding.activeSubscription();
             binding.activeSubscription = null;
         }
@@ -55,8 +56,9 @@ export class ValidateBindingBehavior
         var targetProperty;
         if (binding.sourceExpression && binding.sourceExpression.expression) {
 
-            if(binding.sourceExpression.expression.name)
-            { targetProperty = binding.sourceExpression.expression.name; }
+            if (binding.sourceExpression.expression.name) {
+                targetProperty = binding.sourceExpression.expression.name;
+            }
         }
 
         return targetProperty;
@@ -65,4 +67,4 @@ export class ValidateBindingBehavior
     _isWithinChildBinding(overrideContext) {
         return overrideContext["$index"] || overrideContext["$even"] || overrideContext["$odd"];
     }
-}
+}) || _class) || _class);

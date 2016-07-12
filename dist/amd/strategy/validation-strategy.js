@@ -5,10 +5,10 @@ define(["exports"], function (exports) {
         value: true
     });
 
-    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+    
 
-    var ValidationStrategy = function ValidationStrategy() {
-        _classCallCheck(this, ValidationStrategy);
+    var ValidationStrategy = exports.ValidationStrategy = function ValidationStrategy() {
+        
 
         this.actionValidProperty = function (element, property) {
             throw new Error("Must override method");
@@ -18,6 +18,4 @@ define(["exports"], function (exports) {
             throw new Error("Must override method");
         };
     };
-
-    exports.ValidationStrategy = ValidationStrategy;
 });

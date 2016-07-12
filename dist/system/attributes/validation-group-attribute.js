@@ -1,11 +1,11 @@
-System.register(['aurelia-framework'], function (_export) {
-    'use strict';
+'use strict';
 
-    var inject, customAttribute, ValidationGroupAttribute;
+System.register(['aurelia-framework'], function (_export, _context) {
+    "use strict";
 
-    var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+    var inject, customAttribute, _dec, _dec2, _class, ValidationGroupAttribute;
 
-    function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+    
 
     return {
         setters: [function (_aureliaFramework) {
@@ -13,25 +13,19 @@ System.register(['aurelia-framework'], function (_export) {
             customAttribute = _aureliaFramework.customAttribute;
         }],
         execute: function () {
-            ValidationGroupAttribute = (function () {
+            _export('ValidationGroupAttribute', ValidationGroupAttribute = (_dec = customAttribute('validation-group'), _dec2 = inject(Element), _dec(_class = _dec2(_class = function () {
                 function ValidationGroupAttribute(element) {
-                    _classCallCheck(this, _ValidationGroupAttribute);
+                    
 
                     this.element = element;
                 }
 
-                _createClass(ValidationGroupAttribute, [{
-                    key: 'bind',
-                    value: function bind(binding, overrideContext) {
-                        overrideContext.validationGroup = this.value;
-                    }
-                }]);
+                ValidationGroupAttribute.prototype.bind = function bind(binding, overrideContext) {
+                    overrideContext.validationGroup = this.value;
+                };
 
-                var _ValidationGroupAttribute = ValidationGroupAttribute;
-                ValidationGroupAttribute = inject(Element)(ValidationGroupAttribute) || ValidationGroupAttribute;
-                ValidationGroupAttribute = customAttribute('validation-group')(ValidationGroupAttribute) || ValidationGroupAttribute;
                 return ValidationGroupAttribute;
-            })();
+            }()) || _class) || _class));
 
             _export('ValidationGroupAttribute', ValidationGroupAttribute);
         }

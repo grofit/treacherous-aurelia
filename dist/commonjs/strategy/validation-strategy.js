@@ -4,10 +4,10 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ValidationStrategy = function ValidationStrategy() {
-    _classCallCheck(this, ValidationStrategy);
+
+var ValidationStrategy = exports.ValidationStrategy = function ValidationStrategy() {
+    
 
     this.actionValidProperty = function (element, property) {
         throw new Error("Must override method");
@@ -17,5 +17,3 @@ var ValidationStrategy = function ValidationStrategy() {
         throw new Error("Must override method");
     };
 };
-
-exports.ValidationStrategy = ValidationStrategy;

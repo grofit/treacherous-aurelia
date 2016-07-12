@@ -1,9 +1,9 @@
-import {inject, customElement, useView, bindable} from 'aurelia-framework';
+import {customElement, inlineView, inject, bindable, Element} from "aurelia-framework";
 
 @customElement("validation-summary")
-@useView("./validation-summary.html")
 @inject(Element)
-export class GenerateElement {
+@inlineView('<template><p class="validation-summary-entry" repeat.for="error of propertyErrors">${error.property} - ${error.error}</p></template>')
+export class ValidationSummary {
 
     @bindable validationGroup;
 

@@ -1,30 +1,16 @@
-define(["exports", "./strategy/validation-strategy", "./strategy/inline-strategy", "./binding-behaviours/validate-binding-behaviour"], function (exports, _strategyValidationStrategy, _strategyInlineStrategy, _bindingBehavioursValidateBindingBehaviour) {
-    "use strict";
+define(['exports', './treacherous-aurelia'], function (exports, _treacherousAurelia) {
+  'use strict';
 
-    Object.defineProperty(exports, "__esModule", {
-        value: true
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  Object.keys(_treacherousAurelia).forEach(function (key) {
+    if (key === "default") return;
+    Object.defineProperty(exports, key, {
+      enumerable: true,
+      get: function () {
+        return _treacherousAurelia[key];
+      }
     });
-    exports.configure = configure;
-    Object.defineProperty(exports, "ValidationStrategy", {
-        enumerable: true,
-        get: function get() {
-            return _strategyValidationStrategy.ValidationStrategy;
-        }
-    });
-    Object.defineProperty(exports, "ValidateBindingBehavior", {
-        enumerable: true,
-        get: function get() {
-            return _bindingBehavioursValidateBindingBehaviour.ValidateBindingBehavior;
-        }
-    });
-
-    function configure(aurelia) {
-        aurelia.globalResources("./binding-behaviours/validate-binding-behaviour");
-        aurelia.globalResources("./attributes/validation-group-attribute");
-        aurelia.globalResources("./attributes/validation-options-attribute");
-        aurelia.globalResources("./attributes/validate-property-attribute");
-        aurelia.globalResources("./elements/validation-summary-element");
-
-        aurelia.container.registerInstance(_strategyValidationStrategy.ValidationStrategy, new _strategyInlineStrategy.InlineStrategy());
-    }
+  });
 });

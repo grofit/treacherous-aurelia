@@ -1,8 +1,9 @@
-import {ValidationStrategy} from "./strategy/validation-strategy";
-import {InlineStrategy} from "./strategy/inline-strategy";
+import { ValidationStrategy } from "./strategy/validation-strategy";
+import { InlineStrategy } from "./strategy/inline-strategy";
 
-export {ValidationStrategy} from "./strategy/validation-strategy";
-export {ValidateBindingBehavior} from "./binding-behaviours/validate-binding-behaviour";
+export * from "./strategy/validation-strategy";
+export * from "./strategy/inline-strategy";
+export * from "./binding-behaviours/validate-binding-behaviour";
 
 export function configure(aurelia) {
     aurelia.globalResources("./binding-behaviours/validate-binding-behaviour");

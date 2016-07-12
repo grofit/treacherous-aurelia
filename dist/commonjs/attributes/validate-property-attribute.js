@@ -3,20 +3,21 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.ValidateProperty = undefined;
 
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+var _dec, _dec2, _class;
 
 var _aureliaFramework = require("aurelia-framework");
 
-var _strategyValidationStrategy = require("../strategy/validation-strategy");
+var _validationStrategy = require("../strategy/validation-strategy");
 
-var ValidateProperty = (function () {
+
+
+var ValidateProperty = exports.ValidateProperty = (_dec = (0, _aureliaFramework.customAttribute)('validate-property'), _dec2 = (0, _aureliaFramework.inject)(Element, _validationStrategy.ValidationStrategy), _dec(_class = _dec2(_class = function () {
     function ValidateProperty(element, validationStrategy) {
         var _this = this;
 
-        _classCallCheck(this, _ValidateProperty);
+        
 
         this._validationStateHandler = function (args) {
             if (args.isValid) {
@@ -38,45 +39,35 @@ var ValidateProperty = (function () {
         this.validationStrategy = validationStrategy;
     }
 
-    _createClass(ValidateProperty, [{
-        key: "_isWithinChildBinding",
-        value: function _isWithinChildBinding(overrideContext) {
-            return overrideContext["$index"] || overrideContext["$even"] || overrideContext["$odd"];
+    ValidateProperty.prototype._isWithinChildBinding = function _isWithinChildBinding(overrideContext) {
+        return overrideContext["$index"] || overrideContext["$even"] || overrideContext["$odd"];
+    };
+
+    ValidateProperty.prototype.bind = function bind(binding, overrideContext) {
+        var _this2 = this;
+
+        if (this._isWithinChildBinding(overrideContext)) {
+            overrideContext = overrideContext.parentOverrideContext;
         }
-    }, {
-        key: "bind",
-        value: function bind(binding, overrideContext) {
-            var _this2 = this;
 
-            if (this._isWithinChildBinding(overrideContext)) {
-                overrideContext = overrideContext.parentOverrideContext;
-            }
+        this.validationGroup = overrideContext.validationGroup;
+        this.validationOptions = overrideContext.validationOptions || {};
 
-            this.validationGroup = overrideContext.validationGroup;
-            this.validationOptions = overrideContext.validationOptions || {};
-
-            if (this.validationGroup) {
-                this.setupValidation();
-                this.validationGroup.getPropertyError(this.value).then(function (error) {
-                    if (error) {
-                        _this2.validationStrategy.actionInvalidProperty(_this2.element, _this2.value, error);
-                    }
-                });
-            }
+        if (this.validationGroup) {
+            this.setupValidation();
+            this.validationGroup.getPropertyError(this.value).then(function (error) {
+                if (error) {
+                    _this2.validationStrategy.actionInvalidProperty(_this2.element, _this2.value, error);
+                }
+            });
         }
-    }, {
-        key: "detached",
-        value: function detached() {
-            if (this._activeSubscription) {
-                this._activeSubscription();
-            }
-        }
-    }]);
+    };
 
-    var _ValidateProperty = ValidateProperty;
-    ValidateProperty = (0, _aureliaFramework.inject)(Element, _strategyValidationStrategy.ValidationStrategy)(ValidateProperty) || ValidateProperty;
-    ValidateProperty = (0, _aureliaFramework.customAttribute)('validate-property')(ValidateProperty) || ValidateProperty;
+    ValidateProperty.prototype.detached = function detached() {
+        if (this._activeSubscription) {
+            this._activeSubscription();
+        }
+    };
+
     return ValidateProperty;
-})();
-
-exports.ValidateProperty = ValidateProperty;
+}()) || _class) || _class);

@@ -7,14 +7,14 @@ var paths = require('../paths');
 // to create a dev server instance
 // at http://localhost:9000
 gulp.task('serve', ['build'], function(done) {
-    var bs = browserSync.create('Examples server');
+  var bs = browserSync.create('Sample server');
 
-    bs.init({
-        server: {
-            baseDir: paths.examples,
-            routes: {
-                '/aurelia-chart': path.join(paths.output, 'amd')
-            },
-        },
-    }, done);
+  bs.init({
+    server: {
+      baseDir: paths.sample,
+      routes: {
+        '/aurelia-dialog': path.join(paths.output, 'amd')
+      },
+    },
+  }, done);
 });
